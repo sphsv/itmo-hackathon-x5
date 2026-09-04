@@ -19,8 +19,10 @@
 
 ## Основные документы
 
+- `PRESENTATION_CHECKPOINT.pdf` — исправленная презентация для промежуточной сдачи.
 - `PROJECT_DESCRIPTION.md` — обязательное промежуточное описание проекта.
-- `PRODUCT_BRIEF.md` — продуктовые материалы.
+- `PRODUCT_CHECKPOINT.md` — компактные продуктовые материалы для загрузки.
+- `PRODUCT_BRIEF.md` — расширенный продуктовый черновик.
 - `CONCEPT.md` — спецификация выбранного решения.
 - `CONTEXT_PACK.md` — факты, гипотезы и решения.
 - `CHECKPOINT_PLAN.md` — план и критерии чек-поинта.
@@ -29,6 +31,14 @@
 - `ECONOMICS.md` — сценарные расчёты и sensitivity.
 - `ADDITIONAL_MATERIALS.md` — индекс артефактов и честный статус.
 - `SUBMISSION_CHECKLIST.md` — что проверить перед загрузкой.
+
+## Пакет промежуточной сдачи
+
+1. Презентация — `PRESENTATION_CHECKPOINT.pdf`.
+2. Описание проекта — `PROJECT_DESCRIPTION.md`.
+3. Продуктовые материалы — `PRODUCT_CHECKPOINT.md`.
+4. Дополнительные материалы — `ADDITIONAL_MATERIALS.md`, `ECONOMICS.md` и `AI_LOG.md`.
+5. Репозиторий — <https://github.com/sphsv/itmo-hackathon-x5>.
 
 ## Планируемый запуск POC
 
