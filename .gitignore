@@ -1,0 +1,24 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+node_modules/
+dist/
+build/
+
+# Сырые записи встреч не нужны в публичном репозитории.
+# Удалите правило только после явного разрешения на публикацию.
+meetings/
+
+# Локальные ключи и временные файлы
+*.key
+*.pem
+*.log
+tmp/
