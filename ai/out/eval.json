@@ -1,0 +1,342 @@
+{
+  "summary": {
+    "sample_size": 30,
+    "personalized_behavior_accuracy": 0.9667,
+    "static_one_size_fits_all_accuracy": 0.3667,
+    "absolute_uplift_pp": 60.0,
+    "constraints_pass_rate": 1.0,
+    "note": "Синтетический offline-eval; не доказывает продуктовый uplift."
+  },
+  "rows": [
+    {
+      "user_id": "u_ivanovy",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_dima",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001279",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_000610",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_000983",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_001407",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_000145",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_000624",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_000441",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_001212",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_000362",
+      "true_type": "хозяин",
+      "predicted_type": "хозяин",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_001119",
+      "true_type": "хозяин",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": false,
+      "hit": false,
+      "static_baseline_hit": true
+    },
+    {
+      "user_id": "u_001801",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000006",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001885",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000682",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000244",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000152",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001906",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001838",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000949",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000404",
+      "true_type": "охотник",
+      "predicted_type": "охотник",
+      "ideal_mechanic": "save_product",
+      "recommended": "save_product",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001032",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001383",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "stage_mission",
+      "recommended": "stage_mission",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001208",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001930",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000434",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001534",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_001038",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    },
+    {
+      "user_id": "u_000055",
+      "true_type": "категорийный",
+      "predicted_type": "категорийный",
+      "ideal_mechanic": "rostomer",
+      "recommended": "rostomer",
+      "constraints_ok": true,
+      "type_hit": true,
+      "hit": true,
+      "static_baseline_hit": false
+    }
+  ]
+}

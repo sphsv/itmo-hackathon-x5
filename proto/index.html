@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Растём вместе — PoC</title>
+<style>
+:root{--green:#00a34f;--ink:#202522;--muted:#66706a;--bg:#f3f6f4}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:16px system-ui;color:var(--ink)}
+.app{max-width:430px;margin:auto;min-height:100vh;background:white;padding:20px}
+h1{font-size:27px;margin:8px 0}.lead{color:var(--muted);margin-top:0}
+.switch{display:flex;gap:8px;margin:18px 0}.switch button,.nav button{border:0;border-radius:12px;padding:11px;background:#e8eee9}
+.switch button.active,.nav button.active{background:var(--green);color:white}
+.card{background:#f5f7f5;border-radius:20px;padding:20px;margin:15px 0}.metric{font-size:42px;font-weight:750;color:var(--green)}
+.screen{display:none}.screen.active{display:block}.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;position:sticky;bottom:8px}
+.nav button{font-size:12px;padding:10px 4px}.tag{display:inline-block;background:#ddf5e7;color:#08783d;border-radius:99px;padding:5px 9px;margin:3px}
+ul{padding-left:20px}.small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body><main class="app">
+<h1>Растём вместе</h1><p class="lead">Работающий прототип на синтетических данных</p>
+<div class="switch"><button data-family="family_ivanovy" class="active">Ивановы</button><button data-family="family_dima">Семья Димы</button></div>
+<section id="progress" class="screen active"><div class="card"><div class="small">Рост семьи за 8 недель</div><div class="metric" id="growth"></div><p>Покупки превращаются в видимый семейный прогресс.</p></div></section>
+<section id="challenge" class="screen"><div class="card"><div class="small">Персональный челлендж</div><h2 id="mechanic"></h2><p id="explanation"></p><div id="categories"></div><p><b>Цель экономии: <span id="target"></span> ₽</b></p></div></section>
+<section id="league" class="screen"><div class="card"><div class="small">Лига сопоставимых семей</div><div class="metric">#<span id="rank"></span></div><p>из <span id="members"></span> семей</p><p>До топ-3: покупка примерно на <b><span id="gap"></span> ₽</b></p></div></section>
+<section id="receipt" class="screen"><div class="card"><div class="small">Цифровой чек</div><h2>Ростомер: +2 см</h2><p>Веха: привычная корзина недели</p><p>Спасено: 1 продукт</p><p class="small">Макет; кассовая интеграция не реализована.</p></div></section>
+<nav class="nav"><button data-screen="progress" class="active">Рост</button><button data-screen="challenge">Цель</button><button data-screen="league">Лига</button><button data-screen="receipt">Чек</button></nav>
+</main>
+<script>
+const DATA={"family_ivanovy": {"recommendation": {"user_id": "u_ivanovy", "family_id": "family_ivanovy", "behavior_type": "хозяин", "type_evidence": "markdown=3.4%, концентрация топ-категории=19.7%", "mechanic_first": "rostomer", "mechanic_explanation_user": "Вы регулярно собираете семейную корзину — покажем накопленный прогресс.", "mechanic_explanation_product": "Низкая концентрация и умеренная доля промо: основной экран — ростомер.", "challenge": {"week": "2026-W37", "habitual_items": [{"category": "хлеб", "expected_saving_rub": 40, "why": "входит в частые категории семьи"}, {"category": "фрукты", "expected_saving_rub": 40, "why": "входит в частые категории семьи"}], "stage_mission": null, "markdown_categories": ["хлеб", "фрукты"], "target_saving_rub": 80}, "constraints_checked": {"no_excluded": true, "no_baby_food_markdown": true, "stage_matches": true}}, "simulation": {"growth_cm": 22.6, "rank": 29, "members": 42, "gap_purchase_rub": 1300.0, "points": 235}}, "family_dima": {"recommendation": {"user_id": "u_dima", "family_id": "family_dima", "behavior_type": "охотник", "type_evidence": "markdown=14.5%, концентрация топ-категории=16.7%", "mechanic_first": "save_product", "mechanic_explanation_user": "В ваших чеках заметна уценка — сначала покажем доступные товары «Спаси продукт».", "mechanic_explanation_product": "Высокая доля markdown: основной экран — уценка.", "challenge": {"week": "2026-W37", "habitual_items": [{"category": "фрукты", "expected_saving_rub": 110, "why": "входит в частые категории семьи"}, {"category": "молочка", "expected_saving_rub": 110, "why": "входит в частые категории семьи"}], "stage_mission": null, "markdown_categories": ["фрукты", "молочка"], "target_saving_rub": 220}, "constraints_checked": {"no_excluded": true, "no_baby_food_markdown": true, "stage_matches": true}}, "simulation": {"growth_cm": 21.6, "rank": 8, "members": 50, "gap_purchase_rub": 335.0, "points": 488}}};let family="family_ivanovy";
+function render(){const d=DATA[family],r=d.recommendation,s=d.simulation;
+document.querySelector("#growth").textContent=s.growth_cm.toFixed(1)+" см";
+document.querySelector("#mechanic").textContent=r.mechanic_first;
+document.querySelector("#explanation").textContent=r.mechanic_explanation_user;
+document.querySelector("#categories").innerHTML=r.challenge.habitual_items.map(x=>'<span class="tag">'+x.category+'</span>').join("");
+document.querySelector("#target").textContent=r.challenge.target_saving_rub;
+document.querySelector("#rank").textContent=s.rank;document.querySelector("#members").textContent=s.members;
+document.querySelector("#gap").textContent=s.gap_purchase_rub}
+document.querySelectorAll("[data-family]").forEach(b=>b.onclick=()=>{family=b.dataset.family;document.querySelectorAll("[data-family]").forEach(x=>x.classList.toggle("active",x===b));render()});
+document.querySelectorAll("[data-screen]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".screen").forEach(x=>x.classList.toggle("active",x.id===b.dataset.screen));document.querySelectorAll("[data-screen]").forEach(x=>x.classList.toggle("active",x===b))});render();
+</script></body></html>

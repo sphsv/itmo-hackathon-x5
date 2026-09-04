@@ -1,0 +1,24 @@
+{
+  "families": 2000,
+  "weeks": 8,
+  "one_purchase_to_top3_share": 0.4355,
+  "fraud_review_share": 0.0055,
+  "saved_products": 11165,
+  "demos": {
+    "family_ivanovy": {
+      "growth_cm": 22.6,
+      "rank": 29,
+      "members": 42,
+      "gap_purchase_rub": 1300.0,
+      "points": 235
+    },
+    "family_dima": {
+      "growth_cm": 21.6,
+      "rank": 8,
+      "members": 50,
+      "gap_purchase_rub": 335.0,
+      "points": 488
+    }
+  },
+  "note": "Синтетическая симуляция без заложенного uplift частоты."
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="560">
+<rect width="100%" height="100%" fill="#fff"/><rect x="15" y="15" width="330" height="530" rx="8" fill="#fafafa" stroke="#bbb"/>
+<text x="35" y="60" font-family="monospace" font-size="22" font-weight="bold">X5 · РАСТЁМ ВМЕСТЕ</text>
+<text x="35" y="105" font-family="monospace" font-size="16">Ростомер Ивановых: +2 см</text>
+<text x="35" y="145" font-family="monospace" font-size="16">Всего: 22.6 см</text>
+<text x="35" y="185" font-family="monospace" font-size="16">Веха: привычная корзина</text>
+<text x="35" y="225" font-family="monospace" font-size="16">Спасено: 1 продукт</text>
+<text x="35" y="265" font-family="monospace" font-size="16">Лига: место 29 из 42</text>
+<line x1="35" y1="305" x2="325" y2="305" stroke="#777" stroke-dasharray="5"/>
+<text x="35" y="350" font-family="monospace" font-size="14">Макет цифрового чека.</text>
+<text x="35" y="380" font-family="monospace" font-size="14">Кассовая интеграция не реализована.</text>
+</svg>

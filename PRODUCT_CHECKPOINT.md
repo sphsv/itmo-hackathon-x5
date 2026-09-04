@@ -107,6 +107,8 @@
 
 **Ключевой тезис:** LLM не управляет экономикой программы — он потенциально снижает **marginal cost of personalization**.
 
+В checkpoint-PoC персонализация реализована интерпретируемой моделью без внешнего API. Это воспроизводимый baseline; LLM планируется подключить только как контролируемый слой формулировки и затем сравнить с baseline.
+
 ### AI / LLM
 - персонализация формулировки челленджа;
 - выбор/объяснение первой механики по контексту семьи;
@@ -172,16 +174,16 @@ Product decision → differentiation перенесён на комбинаци�
 |---|---|---|
 | H8: у семей есть movable purchases вне X5 | **ASSUMPTION / критическое** | 8–12 problem interviews + вопрос/данные кейсодателя |
 | Семейный прогресс влияет на следующий визит | **ASSUMPTION** | prototype test / интервью; затем pilot |
-| Персональный challenge полезнее статического | **ASSUMPTION** | blind AI-vs-rule evaluation |
+| Признаки позволяют определить поведенческий контекст | **POC / SYNTHETIC:** 96,7% против 36,7% baseline | проверить на реальных данных |
+| Персональный challenge полезнее статического | **ASSUMPTION** | blind human review и затем пилот |
 | Экономический upside | **MODELLED** | пересчёт на подтверждённых входных данных; A/B pilot |
 | Уценка не создаёт неприемлемую каннибализацию | **ASSUMPTION** | sensitivity + данные/пилот |
-| Antifraud rules достаточно точны для PoC | **DESIGN / IN PROGRESS** | positive/negative/borderline test cases |
+| Antifraud rules достаточно точны для PoC | **POC / SYNTHETIC:** explainable threshold реализован | расширить positive/negative/borderline cases |
 
 ## 12. Что уже есть и что остаётся до финала
 
-**DONE:** сегмент и ставка; концепция; rules v0; экономическая модель; risk register; архитектура AI; UX-сценарий; research по аналогам; документация.
+**DONE:** сегмент и ставка; концепция; rules v0; экономическая модель; risk register; генератор на 2 000 семей; персонализатор и static baseline; offline-eval; simulation; explainable antifraud; мобильный HTML-прототип; единый запуск и тесты.
 
-**IN PROGRESS:** синтетические данные, AI agent/eval, rule engine, simulation, antifraud cases, clickable prototype.
+**IN PROGRESS:** problem interviews, blind human review, уточнение экономики и визуальная полировка прототипа.
 
-**PLANNED BEFORE FINAL:** живые интервью и H8 validation; AI-vs-rule baseline; пересчёт экономики на подтверждённых данных; полноценный end-to-end demo; уточнение pilot design.
-
+**PLANNED BEFORE FINAL:** H8 validation; подключение LLM как контролируемого слоя поверх baseline; пересчёт экономики на подтверждённых данных; уточнение pilot design.

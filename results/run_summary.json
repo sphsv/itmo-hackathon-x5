@@ -1,0 +1,70 @@
+{
+  "config": {
+    "families": 2000,
+    "weeks": 8,
+    "agent_sample": 30,
+    "seed": 42,
+    "step": "all"
+  },
+  "data": {
+    "families": 2000,
+    "receipts": 41191,
+    "items": 330181,
+    "weeks": 12,
+    "segment_share": {
+      "вредные привычки": 0.048,
+      "дети до 3": 0.255,
+      "зрелые": 0.229,
+      "молодёжь": 0.354,
+      "старшие": 0.114
+    },
+    "seed": 42
+  },
+  "ai": {
+    "sample": 30,
+    "mechanics": {
+      "rostomer": 18,
+      "save_product": 11,
+      "stage_mission": 1
+    }
+  },
+  "eval": {
+    "sample_size": 30,
+    "personalized_behavior_accuracy": 0.9667,
+    "static_one_size_fits_all_accuracy": 0.3667,
+    "absolute_uplift_pp": 60.0,
+    "constraints_pass_rate": 1.0,
+    "note": "Синтетический offline-eval; не доказывает продуктовый uplift."
+  },
+  "simulation": {
+    "families": 2000,
+    "weeks": 8,
+    "one_purchase_to_top3_share": 0.4355,
+    "fraud_review_share": 0.0055,
+    "saved_products": 11165,
+    "demos": {
+      "family_ivanovy": {
+        "growth_cm": 22.6,
+        "rank": 29,
+        "members": 42,
+        "gap_purchase_rub": 1300.0,
+        "points": 235
+      },
+      "family_dima": {
+        "growth_cm": 21.6,
+        "rank": 8,
+        "members": 50,
+        "gap_purchase_rub": 335.0,
+        "points": 488
+      }
+    },
+    "note": "Синтетическая симуляция без заложенного uplift частоты."
+  },
+  "prototype": {
+    "prototype": "proto/index.html",
+    "families": [
+      "family_ivanovy",
+      "family_dima"
+    ]
+  }
+}

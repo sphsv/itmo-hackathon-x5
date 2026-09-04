@@ -1,0 +1,90 @@
+{
+  "family_ivanovy": {
+    "recommendation": {
+      "user_id": "u_ivanovy",
+      "family_id": "family_ivanovy",
+      "behavior_type": "хозяин",
+      "type_evidence": "markdown=3.4%, концентрация топ-категории=19.7%",
+      "mechanic_first": "rostomer",
+      "mechanic_explanation_user": "Вы регулярно собираете семейную корзину — покажем накопленный прогресс.",
+      "mechanic_explanation_product": "Низкая концентрация и умеренная доля промо: основной экран — ростомер.",
+      "challenge": {
+        "week": "2026-W37",
+        "habitual_items": [
+          {
+            "category": "хлеб",
+            "expected_saving_rub": 40,
+            "why": "входит в частые категории семьи"
+          },
+          {
+            "category": "фрукты",
+            "expected_saving_rub": 40,
+            "why": "входит в частые категории семьи"
+          }
+        ],
+        "stage_mission": null,
+        "markdown_categories": [
+          "хлеб",
+          "фрукты"
+        ],
+        "target_saving_rub": 80
+      },
+      "constraints_checked": {
+        "no_excluded": true,
+        "no_baby_food_markdown": true,
+        "stage_matches": true
+      }
+    },
+    "simulation": {
+      "growth_cm": 22.6,
+      "rank": 29,
+      "members": 42,
+      "gap_purchase_rub": 1300.0,
+      "points": 235
+    }
+  },
+  "family_dima": {
+    "recommendation": {
+      "user_id": "u_dima",
+      "family_id": "family_dima",
+      "behavior_type": "охотник",
+      "type_evidence": "markdown=14.5%, концентрация топ-категории=16.7%",
+      "mechanic_first": "save_product",
+      "mechanic_explanation_user": "В ваших чеках заметна уценка — сначала покажем доступные товары «Спаси продукт».",
+      "mechanic_explanation_product": "Высокая доля markdown: основной экран — уценка.",
+      "challenge": {
+        "week": "2026-W37",
+        "habitual_items": [
+          {
+            "category": "фрукты",
+            "expected_saving_rub": 110,
+            "why": "входит в частые категории семьи"
+          },
+          {
+            "category": "молочка",
+            "expected_saving_rub": 110,
+            "why": "входит в частые категории семьи"
+          }
+        ],
+        "stage_mission": null,
+        "markdown_categories": [
+          "фрукты",
+          "молочка"
+        ],
+        "target_saving_rub": 220
+      },
+      "constraints_checked": {
+        "no_excluded": true,
+        "no_baby_food_markdown": true,
+        "stage_matches": true
+      }
+    },
+    "simulation": {
+      "growth_cm": 21.6,
+      "rank": 8,
+      "members": 50,
+      "gap_purchase_rub": 335.0,
+      "points": 488
+    }
+  }
+}
