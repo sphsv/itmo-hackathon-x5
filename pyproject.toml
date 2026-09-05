@@ -1,0 +1,10 @@
+[project]
+name = "itmo-hackathon-x5"
+version = "0.1.0"
+description = "X5 «Растём вместе» end-to-end hackathon PoC"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+package = false
