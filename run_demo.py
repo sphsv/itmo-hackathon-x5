@@ -10,6 +10,7 @@ from data import (
     prepare_blind_review_sample,
     prepare_fraud_benchmark,
     prepare_target_dataset,
+    validate_source_dataset,
 )
 from proto import build
 from sim import simulate
@@ -28,10 +29,12 @@ def main() -> None:
 
     if args.step in {"all", "data"}:
         summary["data"] = generate(args.families, args.seed, 12, root)
+        summary["data_quality"] = validate_source_dataset(root)
         summary["target_data"] = prepare_target_dataset(root)
         summary["blind_review_data"] = prepare_blind_review_sample(root=root)
         summary["fraud_benchmark"] = prepare_fraud_benchmark(root)
         print(f"DATA families={summary['data']['families']} receipts={summary['data']['receipts']} seed={args.seed}")
+        print(f"DATA_QUALITY status={summary['data_quality']['status']}")
         print(
             f"TARGET profiles={summary['target_data']['counts']['profiles']} "
             f"receipts={summary['target_data']['counts']['receipts']} "

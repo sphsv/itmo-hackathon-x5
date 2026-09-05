@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,6 +13,7 @@ from data import (
     prepare_fraud_benchmark,
     prepare_target_dataset,
     validate_target_rows,
+    validate_source_dataset,
 )
 from proto import build
 from sim import simulate
@@ -24,6 +26,22 @@ class PocTests(unittest.TestCase):
             root = Path(tmp)
             data_result = generate(60, seed=42, history_weeks=12, root=root)
             self.assertEqual(data_result["families"], 60)
+            quality_result = validate_source_dataset(root)
+            structural_checks = [
+                "expected_schemas",
+                "tables_are_not_empty",
+                "family_ids_are_unique",
+                "receipt_ids_are_unique",
+                "receipts_reference_profiles",
+                "items_reference_receipts",
+                "receipt_item_counts_match",
+                "receipt_amounts_reconcile",
+                "item_prices_are_valid",
+                "excluded_flags_match_categories",
+                "baby_food_is_not_marked_down",
+                "child_stage_matches_segment",
+            ]
+            self.assertTrue(all(quality_result["checks"][name] for name in structural_checks))
             with (root / "data" / "out" / "receipt_items.csv").open(encoding="utf-8") as fh:
                 items = list(csv.DictReader(fh))
             forbidden_markdown = {
@@ -106,6 +124,21 @@ class PocTests(unittest.TestCase):
         self.assertEqual(report["status"], "failed")
         self.assertFalse(report["checks"]["receipts_reference_profiles"])
         self.assertFalse(report["checks"]["items_reference_receipts"])
+
+    def test_generation_is_reproducible_for_same_seed(self) -> None:
+        with tempfile.TemporaryDirectory() as first_tmp, tempfile.TemporaryDirectory() as second_tmp:
+            first_root = Path(first_tmp)
+            second_root = Path(second_tmp)
+            generate(80, seed=17, history_weeks=12, root=first_root)
+            generate(80, seed=17, history_weeks=12, root=second_root)
+            for filename in ["profiles.csv", "receipts.csv", "receipt_items.csv"]:
+                first = hashlib.sha256(
+                    (first_root / "data" / "out" / filename).read_bytes()
+                ).digest()
+                second = hashlib.sha256(
+                    (second_root / "data" / "out" / filename).read_bytes()
+                ).digest()
+                self.assertEqual(first, second, filename)
 
 
 if __name__ == "__main__":
