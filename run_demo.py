@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from ai import evaluate, run_agent
-from data import generate, prepare_target_dataset
+from data import generate, prepare_blind_review_sample, prepare_target_dataset
 from proto import build
 from sim import simulate
 
@@ -24,12 +24,14 @@ def main() -> None:
     if args.step in {"all", "data"}:
         summary["data"] = generate(args.families, args.seed, 12, root)
         summary["target_data"] = prepare_target_dataset(root)
+        summary["blind_review_data"] = prepare_blind_review_sample(root=root)
         print(f"DATA families={summary['data']['families']} receipts={summary['data']['receipts']} seed={args.seed}")
         print(
             f"TARGET profiles={summary['target_data']['counts']['profiles']} "
             f"receipts={summary['target_data']['counts']['receipts']} "
             f"quality={summary['target_data']['status']}"
         )
+        print(f"REVIEW profiles={summary['blind_review_data']['sample_size']}")
     if args.step in {"all", "ai"}:
         summary["ai"] = run_agent(args.agent_sample, args.seed, root)
         print(f"AI sample={summary['ai']['sample']} mechanics={summary['ai']['mechanics']}")

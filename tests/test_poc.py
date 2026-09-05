@@ -6,7 +6,12 @@ import unittest
 from pathlib import Path
 
 from ai import evaluate, run_agent
-from data import generate, prepare_target_dataset, validate_target_rows
+from data import (
+    generate,
+    prepare_blind_review_sample,
+    prepare_target_dataset,
+    validate_target_rows,
+)
 from proto import build
 from sim import simulate
 from sim.rules import fraud_score, referral_status, review_required
@@ -31,6 +36,21 @@ class PocTests(unittest.TestCase):
             with (root / "data" / "out" / "target_profiles.csv").open(encoding="utf-8") as fh:
                 target_profiles = list(csv.DictReader(fh))
             self.assertTrue(all(row["x5_segment"] == "дети до 3" for row in target_profiles))
+
+            review_result = prepare_blind_review_sample(10, seed=42, root=root)
+            self.assertEqual(review_result["sample_size"], 10)
+            with (root / "data" / "out" / "blind_review_profiles.csv").open(encoding="utf-8") as fh:
+                review_profiles = list(csv.DictReader(fh))
+            with (root / "data" / "out" / "blind_review_key.csv").open(encoding="utf-8") as fh:
+                review_key = list(csv.DictReader(fh))
+            self.assertEqual(len(review_profiles), 10)
+            self.assertEqual(len(review_key), 10)
+            self.assertNotIn("family_id", review_profiles[0])
+            self.assertNotIn("behavior_type", review_profiles[0])
+            self.assertEqual(
+                {row["review_id"] for row in review_profiles},
+                {row["review_id"] for row in review_key},
+            )
 
             agent_result = run_agent(30, seed=42, root=root)
             self.assertEqual(agent_result["sample"], 30)

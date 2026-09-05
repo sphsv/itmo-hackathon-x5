@@ -1,0 +1,26 @@
+{
+  "sample_size": 40,
+  "requested_sample_size": 40,
+  "seed": 42,
+  "weeks_observed": 8,
+  "child_stage_distribution": {
+    "0-6": 9,
+    "1-2": 9,
+    "2-3": 9,
+    "6-9": 7,
+    "9-12": 6
+  },
+  "behavior_distribution_internal": {
+    "категорийный": 14,
+    "охотник": 13,
+    "хозяин": 13
+  },
+  "evaluator_files": [
+    "blind_review_profiles.csv",
+    "blind_review_ratings_template.csv"
+  ],
+  "internal_files": [
+    "blind_review_key.csv"
+  ],
+  "note": "The evaluator must not receive the internal key or information about which system generated options A and B."
+}
