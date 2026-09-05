@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 from ai import evaluate, run_agent
-from data import generate
+from data import generate, prepare_target_dataset, validate_target_rows
 from proto import build
 from sim import simulate
 from sim.rules import fraud_score, referral_status, review_required
@@ -24,6 +24,13 @@ class PocTests(unittest.TestCase):
                 "детское пюре", "детские каши", "детские творожки", "заменители грудного молока"
             }
             self.assertFalse(any(row["category"] in forbidden_markdown and row["is_markdown"] == "true" for row in items))
+
+            target_result = prepare_target_dataset(root)
+            self.assertEqual(target_result["status"], "passed")
+            self.assertGreater(target_result["counts"]["profiles"], 0)
+            with (root / "data" / "out" / "target_profiles.csv").open(encoding="utf-8") as fh:
+                target_profiles = list(csv.DictReader(fh))
+            self.assertTrue(all(row["x5_segment"] == "дети до 3" for row in target_profiles))
 
             agent_result = run_agent(30, seed=42, root=root)
             self.assertEqual(agent_result["sample"], 30)
@@ -48,6 +55,22 @@ class PocTests(unittest.TestCase):
         self.assertEqual(referral_status(48, False), "pending")
         self.assertEqual(referral_status(80, False), "confirmed")
         self.assertEqual(referral_status(80, True), "cancelled")
+
+    def test_target_validation_detects_broken_references(self) -> None:
+        report = validate_target_rows(
+            profiles=[{
+                "family_id": "family_1", "x5_segment": "дети до 3",
+                "child_stage": "1-2", "behavior_type": "хозяин",
+            }],
+            receipts=[{"receipt_id": "receipt_1", "family_id": "family_missing"}],
+            items=[{
+                "receipt_id": "receipt_missing", "category": "молочка",
+                "is_markdown": "false",
+            }],
+        )
+        self.assertEqual(report["status"], "failed")
+        self.assertFalse(report["checks"]["receipts_reference_profiles"])
+        self.assertFalse(report["checks"]["items_reference_receipts"])
 
 
 if __name__ == "__main__":
