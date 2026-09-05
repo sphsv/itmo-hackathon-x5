@@ -9,6 +9,7 @@ from ai import evaluate, run_agent
 from data import (
     generate,
     prepare_blind_review_sample,
+    prepare_fraud_benchmark,
     prepare_target_dataset,
     validate_target_rows,
 )
@@ -51,6 +52,20 @@ class PocTests(unittest.TestCase):
                 {row["review_id"] for row in review_profiles},
                 {row["review_id"] for row in review_key},
             )
+
+            fraud_result = prepare_fraud_benchmark(root)
+            self.assertEqual(fraud_result["cases"], 40)
+            self.assertEqual(
+                fraud_result["cohorts"],
+                {"normal": 20, "borderline": 10, "fraud": 10},
+            )
+            threshold_70 = next(
+                row for row in fraud_result["threshold_metrics"]
+                if row["threshold"] == 70
+            )
+            self.assertGreater(threshold_70["precision"], 0)
+            self.assertGreater(threshold_70["recall"], 0)
+            self.assertLess(threshold_70["recall"], 1)
 
             agent_result = run_agent(30, seed=42, root=root)
             self.assertEqual(agent_result["sample"], 30)
