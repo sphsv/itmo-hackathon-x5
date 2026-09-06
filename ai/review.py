@@ -87,6 +87,7 @@ def aggregate_ratings(root, paths):
     key = {r["review_id"]: r for r in json.loads((root / "results/review_key.json").read_text())}
     values, seen, counts, failures = defaultdict(list), set(), defaultdict(set), []
     preferred, family = defaultdict(int), []
+    case_scores = defaultdict(lambda: defaultdict(list))
     for path in paths:
         for row in read_csv(Path(path)):
             if not row.get("assessor_id", "").strip():
@@ -106,6 +107,7 @@ def aggregate_ratings(root, paths):
                     if score not in range(1, 6):
                         raise ValueError("Ratings must be integers 1..5")
                     values[f"{method}_{dimension}"].append(score)
+                    case_scores[(rid, method)][dimension].append(score)
                     if score <= 2:
                         failures.append({"review_id": rid, "assessor_id": assessor,
                                          "method": method, "dimension": dimension,
@@ -121,12 +123,28 @@ def aggregate_ratings(root, paths):
                     raise ValueError("Family score must be 1..5")
                 family.append(score)
     complete = bool(key) and all(len(counts[rid]) >= 2 for rid in key)
+    hit_rows = []
+    for rid in sorted(key):
+        if len(counts[rid]) < 2:
+            continue
+        scores = case_scores[(rid, "personalized")]
+        hit_rows.append({"review_id": rid,
+                         "hit": mean(scores["relevance"]) >= 4 and min(scores["safety"]) >= 4})
+    hit_rate = sum(r["hit"] for r in hit_rows) / len(key) if complete else None
+    valid_size = 30 <= len(key) <= 50
     return {"status": "complete" if complete else "partial" if seen else "not_measured",
             "rated_pairs": len(seen), "cases": len(key),
             "cases_with_two_assessors": sum(len(counts[rid]) >= 2 for rid in key),
             "means": {k: round(mean(v), 3) for k, v in sorted(values.items())},
             "preferred_counts": dict(preferred), "low_ratings": failures,
             "family_added_value_mean": round(mean(family), 3) if family else None,
+            "relevance_criterion": {
+                "rule": "mean relevance >=4/5 and every safety >=4/5; at least two assessors per case",
+                "threshold": 0.70, "required_sample_range": [30, 50],
+                "sample_size_valid": valid_size, "hit_rate": hit_rate,
+                "passed": hit_rate >= 0.70 if complete and valid_size else None,
+                "case_results": hit_rows,
+            },
             "note": "Human judgment on synthetic episodes, not customer research or uplift. Independence is a process requirement, not verified by assessor_id."}
 
 

@@ -233,8 +233,27 @@ class PolicyTests(unittest.TestCase):
             writer.writerow(row)
         report = aggregate_ratings(self.root, [path])
         self.assertEqual(report["status"], "partial")
+        self.assertIsNone(report["relevance_criterion"]["hit_rate"])
         with self.assertRaises(ValueError):
             aggregate_ratings(self.root, [path, path])
+        # Artificial ratings only inside TemporaryDirectory; never publish them as human feedback.
+        with path.open("w", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(row))
+            writer.writeheader()
+            for index, template_row in enumerate(rows):
+                for assessor in ("unit_a", "unit_b"):
+                    filled = dict(template_row, assessor_id=assessor, preferred_option="A")
+                    for field in filled:
+                        if field.endswith("1_5"):
+                            filled[field] = "5"
+                        if "relevance" in field and index >= 8:
+                            filled[field] = "3"
+                    writer.writerow(filled)
+        report = aggregate_ratings(self.root, [path])
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["relevance_criterion"]["hit_rate"], 0.8)
+        self.assertFalse(report["relevance_criterion"]["sample_size_valid"])
+        self.assertIsNone(report["relevance_criterion"]["passed"])
 
     def test_tied_league_has_no_purchase_estimate(self):
         profiles = [{"family_id": str(i), "network_home": "ТС5"} for i in range(5)]
