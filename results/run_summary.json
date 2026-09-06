@@ -20,6 +20,210 @@
     },
     "seed": 42
   },
+  "data_quality": {
+    "status": "passed",
+    "checks": {
+      "expected_schemas": true,
+      "tables_are_not_empty": true,
+      "family_ids_are_unique": true,
+      "receipt_ids_are_unique": true,
+      "receipts_reference_profiles": true,
+      "items_reference_receipts": true,
+      "receipt_item_counts_match": true,
+      "receipt_amounts_reconcile": true,
+      "item_prices_are_valid": true,
+      "excluded_flags_match_categories": true,
+      "baby_food_is_not_marked_down": true,
+      "child_stage_matches_segment": true,
+      "all_profiles_are_app_users": true,
+      "at_least_eight_weeks": true,
+      "segment_share_within_1pp": true,
+      "target_avg_check_is_higher": true,
+      "target_frequency_is_higher": true,
+      "hunter_markdown_rate_is_higher": true
+    },
+    "failed_checks": [],
+    "counts": {
+      "profiles": 2000,
+      "receipts": 41191,
+      "items": 330181,
+      "weeks": 12
+    },
+    "metrics": {
+      "actual_segment_share": {
+        "молодёжь": 0.3545,
+        "вредные привычки": 0.048,
+        "дети до 3": 0.255,
+        "зрелые": 0.229,
+        "старшие": 0.1135
+      },
+      "expected_segment_share": {
+        "молодёжь": 0.3453,
+        "вредные привычки": 0.0462,
+        "дети до 3": 0.2638,
+        "зрелые": 0.2262,
+        "старшие": 0.1214
+      },
+      "segment_deviation_pp": {
+        "молодёжь": 0.92,
+        "вредные привычки": 0.18,
+        "дети до 3": 0.88,
+        "зрелые": 0.28,
+        "старшие": 0.79
+      },
+      "avg_check_rub": {
+        "target": 750.55,
+        "other": 620.71
+      },
+      "base_frequency_per_week": {
+        "target": 2.276,
+        "other": 1.485
+      },
+      "markdown_rate_by_behavior": {
+        "хозяин": 0.0227,
+        "охотник": 0.1132,
+        "категорийный": 0.0251
+      }
+    },
+    "sha256": {
+      "profiles.csv": "9c9e6e9a75c66671272f6b3dc327f24e5d09204e7868f950a20b0ebd73a7b173",
+      "receipts.csv": "4fbb61c2bd9c252b4f11658b2f13cb7a5366f74fce71ed4e6e1a278889d6a721",
+      "receipt_items.csv": "1676974229c4617c70cdef738dd0249415f163856c4b7951c875c8ebeafe66cb"
+    },
+    "note": "Synthetic data quality report. Distribution and behavior checks validate generator assumptions, not real customer behavior."
+  },
+  "target_data": {
+    "status": "passed",
+    "checks": {
+      "dataset_is_not_empty": true,
+      "profiles_are_target_segment": true,
+      "child_stage_is_present": true,
+      "family_ids_are_unique": true,
+      "receipt_ids_are_unique": true,
+      "receipts_reference_profiles": true,
+      "items_reference_receipts": true,
+      "baby_food_is_not_marked_down": true
+    },
+    "failed_checks": [],
+    "counts": {
+      "profiles": 510,
+      "receipts": 14128,
+      "items": 113531
+    },
+    "child_stage_distribution": {
+      "0-6": 92,
+      "1-2": 112,
+      "2-3": 108,
+      "6-9": 103,
+      "9-12": 95
+    },
+    "behavior_distribution": {
+      "категорийный": 92,
+      "охотник": 164,
+      "хозяин": 254
+    }
+  },
+  "blind_review_data": {
+    "sample_size": 40,
+    "requested_sample_size": 40,
+    "seed": 42,
+    "weeks_observed": 8,
+    "child_stage_distribution": {
+      "0-6": 9,
+      "1-2": 9,
+      "2-3": 9,
+      "6-9": 7,
+      "9-12": 6
+    },
+    "behavior_distribution_internal": {
+      "категорийный": 14,
+      "охотник": 13,
+      "хозяин": 13
+    },
+    "evaluator_files": [
+      "blind_review_profiles.csv",
+      "blind_review_ratings_template.csv"
+    ],
+    "internal_files": [
+      "blind_review_key.csv"
+    ],
+    "note": "The evaluator must not receive the internal key or information about which system generated options A and B."
+  },
+  "fraud_benchmark": {
+    "cases": 40,
+    "cohorts": {
+      "normal": 20,
+      "borderline": 10,
+      "fraud": 10
+    },
+    "threshold_metrics": [
+      {
+        "threshold": 40,
+        "tp": 10,
+        "fp": 5,
+        "tn": 15,
+        "fn": 0,
+        "precision": 0.6667,
+        "recall": 1.0,
+        "borderline_sent_to_review": 10
+      },
+      {
+        "threshold": 50,
+        "tp": 8,
+        "fp": 4,
+        "tn": 16,
+        "fn": 2,
+        "precision": 0.6667,
+        "recall": 0.8,
+        "borderline_sent_to_review": 9
+      },
+      {
+        "threshold": 60,
+        "tp": 5,
+        "fp": 2,
+        "tn": 18,
+        "fn": 5,
+        "precision": 0.7143,
+        "recall": 0.5,
+        "borderline_sent_to_review": 5
+      },
+      {
+        "threshold": 70,
+        "tp": 5,
+        "fp": 1,
+        "tn": 19,
+        "fn": 5,
+        "precision": 0.8333,
+        "recall": 0.5,
+        "borderline_sent_to_review": 2
+      },
+      {
+        "threshold": 80,
+        "tp": 4,
+        "fp": 1,
+        "tn": 19,
+        "fn": 6,
+        "precision": 0.8,
+        "recall": 0.4,
+        "borderline_sent_to_review": 0
+      },
+      {
+        "threshold": 90,
+        "tp": 3,
+        "fp": 0,
+        "tn": 20,
+        "fn": 7,
+        "precision": 1.0,
+        "recall": 0.3,
+        "borderline_sent_to_review": 0
+      }
+    ],
+    "limitations": [
+      "Сценарии экспертно заданы и не являются реальными antifraud-данными X5.",
+      "Пограничные случаи исключены из precision и recall до ручной разметки.",
+      "Метрики показывают поведение ruleset v0, а не production-качество."
+    ]
+  },
   "ai": {
     "sample": 30,
     "mechanics": {

@@ -46,14 +46,18 @@
 Требуется Python 3.11+; внешние зависимости и API-ключи не нужны.
 
 ```bash
-python3 run_demo.py --families 2000 --weeks 8 --agent-sample 30 --seed 42
+uv sync
+uv run python run_demo.py --families 2000 --weeks 8 --agent-sample 30 --seed 42
 ```
 
 Тесты:
 
 ```bash
-python3 -m unittest discover -s tests -v
+uv run python -m unittest discover -s tests -v
 ```
+
+Если `uv` не установлен, прямой запуск через `python3` по-прежнему работает,
+поскольку PoC не использует внешние Python-зависимости.
 
 Проверенный прогон (`seed=42`): 2 000 семей, 41 191 чек, 330 181 позиция; accuracy определения поведенческого контекста 96,7% против 36,7% one-size-fits-all baseline; constraints pass rate 100%; 43,5% семей в симуляции достаточно одной средней покупки до топ-3. Все показатели синтетические и характеризуют только работу PoC.
 
