@@ -60,13 +60,13 @@ def main():
     check("checked_synthetic_numbers", summary["data"]["families"] == 2000 and metrics["unique_families"] == 510
           and metrics["sample_size"] == 2040 and summary["ai"]["assigned"] == 510)
     check("test_and_reproducibility_report", verification["status"] == "passed"
-          and verification["workspace_matches_clean_runs"] and "Ran 25 tests" in verification["test_output"])
+          and verification["workspace_matches_clean_runs"] and "Ran 28 tests" in verification["test_output"])
     drift = [name for name, digest in verification["sha256"].items()
              if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest]
     check("generated_evidence_has_not_drifted", not drift)
     check("browser_event_cycle", browser["status"] == "passed" and browser["earned_points"] == 28
           and browser["duplicate_points"] == 28 and browser["returned_points"] == 0)
-    with ZipFile(ROOT / "output/presentation/PRESENTATION_FINAL.pptx") as archive:
+    with ZipFile(ROOT / "output/presentation/egor-update/PRESENTATION_FINAL_UPDATED.pptx") as archive:
         slides = []
         for index in range(1, 10):
             tree = ET.fromstring(archive.read(f"ppt/slides/slide{index}.xml"))
@@ -76,11 +76,11 @@ def main():
     for system in ("personalized", "static"):
         rate = f"{metrics['systems'][system]['observed_completion_rate_itt']*100:.1f}%".replace(".", ",")
         check("slide_metric_" + system, rate in slides[5])
-    check("slide_test_count", "25 тестов" in slides[5])
+    check("slide_test_count", "28 тестов" in slides[5])
     check("slide_team_roles_and_participation", all(name in slides[8] for name in ("Талалаев Иван", "Тищенко Егор", "Сухова Софья"))
           and slides[8].count("активное") == 3)
     check("slide_old_metrics_removed", "96,7%" not in " ".join(slides) and "43,5%" not in " ".join(slides))
-    check("final_pdf_exists", (ROOT / "output/presentation/PRESENTATION_FINAL.pdf").read_bytes().startswith(b"%PDF"))
+    check("final_pdf_exists", (ROOT / "output/presentation/egor-update/PRESENTATION_FINAL_UPDATED.pdf").read_bytes().startswith(b"%PDF"))
     protected = set()
     for head in PR_HEADS:
         protected.update(git("diff", "--name-only", BASE, head))

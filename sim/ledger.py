@@ -95,7 +95,8 @@ def reduce_receipts(goal, receipts, cancelled=()):
     # Tenths of a centimeter eliminate floating-point drift.
     growth_tenths = min(50, len(days) * 8 + (20 if complete else 0)
                         + min(10, totals["markdown_units"] * 2)) if assigned else 0
-    return {"assignment_id": goal["assignment_id"], "rule_version": RULE_VERSION,
+    return {"assignment_id": goal["assignment_id"], "rule_version": goal.get("rule_version", RULE_VERSION),
+            "variant_id": goal.get("variant_id"), "rollout_id": goal.get("rollout_id"),
             "status": "completed" if complete else goal["status"],
             "challenge_completed": complete, "totals": totals,
             "points": min(300, raw_points), "uncapped_points": raw_points,
@@ -144,7 +145,12 @@ class Ledger:
         receipts = [json.loads(r[0]) for r in self.db.execute("SELECT payload FROM receipts WHERE family=?", (family,))]
         cancelled = [r[0] for r in self.db.execute("SELECT id FROM cancellations WHERE family=?", (family,))]
         result = reduce_receipts(goal, receipts, cancelled)
-        result["audit"] = [{"action": r[0], "receipt_id": r[1]} for r in self.db.execute(
+        result["audit"] = [{"action": r[0], "receipt_id": r[1],
+                            "family_id": family, "assignment_id": goal["assignment_id"],
+                            "variant_id": goal.get("variant_id"),
+                            "rule_version": goal.get("rule_version", RULE_VERSION),
+                            "rollout_id": goal.get("rollout_id")}
+                           for r in self.db.execute(
             "SELECT action,receipt_id FROM audit WHERE family=? ORDER BY seq", (family,))]
         return result
 

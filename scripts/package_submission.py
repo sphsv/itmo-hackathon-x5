@@ -7,7 +7,8 @@ from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 FILES = [
-    "output/presentation/PRESENTATION_FINAL.pdf", "output/presentation/PRESENTATION_FINAL.pptx",
+    "output/presentation/egor-update/PRESENTATION_FINAL_UPDATED.pdf",
+    "output/presentation/egor-update/PRESENTATION_FINAL_UPDATED.pptx",
     "PROJECT_DESCRIPTION.md", "PRODUCT_FINAL.md", "PRODUCT_VALIDATION.md", "PILOT_DESIGN.md",
     "ADDITIONAL_MATERIALS.md", "MODEL_CARD.md", "DEMO.md", "HUMAN_REVIEW.md",
     "ECONOMICS.md", "AI_LOG.md", "FINAL_SUBMISSION_CHECKLIST.md", "ЧТО_ОСТАЛОСЬ_ДОДЕЛАТЬ.md",
@@ -30,7 +31,7 @@ def main():
     contents = {name: (ROOT / name).read_bytes() for name in FILES}
     contents["START_HERE.md"] = """# Финальная сдача · 07.09.2026 до 10:00
 
-1. Презентация: output/presentation/PRESENTATION_FINAL.pdf (PPTX — редактируемый исходник).
+1. Презентация: output/presentation/egor-update/PRESENTATION_FINAL_UPDATED.pdf (PPTX — редактируемый исходник).
 2. Описание: PROJECT_DESCRIPTION.md.
 3. Продукт: PRODUCT_FINAL.md, PRODUCT_VALIDATION.md, PILOT_DESIGN.md — ровно три материала.
 4. Дополнительное — рекомендуемые 6 файлов: ADDITIONAL_MATERIALS.md, MODEL_CARD.md, ai/out/eval.md, results/verification.json, output/demo/02_completed.png, output/demo/04_returned.png. Остальные файлы — запасные доказательства и инструкции, не нужно загружать их все в раздел с лимитом 10.

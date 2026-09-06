@@ -31,13 +31,13 @@ python3 serve_demo.py --db results/defense-02.sqlite3
 - Локальный HTTP API, SQLite, мобильный интерфейс, журнал событий и пауза начислений.
 - Оценка: временной replay и static baseline; слепой пакет на 40 ситуаций и валидатор человеческих оценок.
 - Antifraud: отдельный сценарный benchmark на 40 случаях. Это направление на проверку, не автоматическая блокировка.
-- A/B/C/D: продуктовый дизайн пилота и технический предпросмотр распределения, **не проведённый эксперимент**.
+- A/B/C/D: фиксированная когорта, единые `variant_id`/`rollout_id`/`rule_version`, событийный replay и сценарная сетка множителей C−B и D−C. `shown`, `accepted`, стоимость награды и latency честно помечены как не измеренные; это **не проведённый эксперимент**.
 
 ## Проверенные результаты
 
 | Проверка | Результат |
 |---|---:|
-| Автоматические тесты, включая HTTP | 25 |
+| Автоматические тесты, включая HTTP | 28 |
 | Целевые семьи / временные эпизоды на систему | 510 / 2 040 |
 | Назначено целей в replay | 2 034 / 2 040 |
 | Выполнено на следующих синтетических чеках, все эпизоды | 64,6% персонально / 33,7% static |
@@ -59,7 +59,7 @@ python3 scripts/verify_final.py
 
 Дедлайн: **07.09.2026, 10:00**. [Готовый комплект ZIP](submission/FINAL_SUBMISSION.zip) содержит только отобранные финальные документы и доказательства. [Что осталось доделать](ЧТО_ОСТАЛОСЬ_ДОДЕЛАТЬ.md) — короткая передача задач коллегам.
 
-1. [Презентация FINAL.pdf](output/presentation/PRESENTATION_FINAL.pdf), редактируемая [FINAL.pptx](output/presentation/PRESENTATION_FINAL.pptx).
+1. [Обновлённая презентация PDF](output/presentation/egor-update/PRESENTATION_FINAL_UPDATED.pdf), редактируемая [PPTX](output/presentation/egor-update/PRESENTATION_FINAL_UPDATED.pptx). Предыдущая FINAL сохранена как исходная версия до инженерного обновления.
 2. [PROJECT_DESCRIPTION.md](PROJECT_DESCRIPTION.md) — финальное описание проекта.
 3. [PRODUCT_FINAL.md](PRODUCT_FINAL.md), [PRODUCT_VALIDATION.md](PRODUCT_VALIDATION.md) и [PILOT_DESIGN.md](PILOT_DESIGN.md) — три продуктовых материала: продукт, критерии/результаты/выводы и пилот.
 4. [ADDITIONAL_MATERIALS.md](ADDITIONAL_MATERIALS.md) — индекс кода, оценок, данных и скриншотов.
