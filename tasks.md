@@ -1,5 +1,7 @@
 # Задания — промежуточная версия
 
+> Архив планирования/checkpoint до финальной интеграции 06.09.2026. Ниже сохранены прежние решения и TODO, не текущий контракт кода. Актуальны [PROJECT_DESCRIPTION.md](PROJECT_DESCRIPTION.md), [MODEL_CARD.md](MODEL_CARD.md) и [FINAL_SUBMISSION_CHECKLIST.md](FINAL_SUBMISSION_CHECKLIST.md).
+
 Все задания сдать до **04.09.2026 14:00**.
 
 | Задание | Статус | Прогресс |

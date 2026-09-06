@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "viewport_desktop": [
+    1360,
+    1120
+  ],
+  "viewport_mobile": [
+    390,
+    844
+  ],
+  "before_points": 0,
+  "earned_points": 28,
+  "duplicate_points": 28,
+  "returned_points": 0,
+  "uncaught_exceptions": [],
+  "checks": [
+    "actual button -> HTTP -> SQLite -> DOM",
+    "duplicate",
+    "return",
+    "mobile overflow"
+  ]
+}

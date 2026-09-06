@@ -1,0 +1,202 @@
+[
+  {
+    "review_id": "review_001",
+    "family_id": "family_000202",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_002",
+    "family_id": "family_001624",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_003",
+    "family_id": "family_001415",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_004",
+    "family_id": "family_001541",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_005",
+    "family_id": "family_001590",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_006",
+    "family_id": "family_001853",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_007",
+    "family_id": "family_001860",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_008",
+    "family_id": "family_000170",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_009",
+    "family_id": "family_000267",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_010",
+    "family_id": "family_000356",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_011",
+    "family_id": "family_000148",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_012",
+    "family_id": "family_001878",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_013",
+    "family_id": "family_000746",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_014",
+    "family_id": "family_000059",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_015",
+    "family_id": "family_001207",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_016",
+    "family_id": "family_001083",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_017",
+    "family_id": "family_001144",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_018",
+    "family_id": "family_001237",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_019",
+    "family_id": "family_001655",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_020",
+    "family_id": "family_001267",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_021",
+    "family_id": "family_000821",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_022",
+    "family_id": "family_001834",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_023",
+    "family_id": "family_000146",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_024",
+    "family_id": "family_000276",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_025",
+    "family_id": "family_001498",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_026",
+    "family_id": "family_001399",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_027",
+    "family_id": "family_000122",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_028",
+    "family_id": "family_000896",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_029",
+    "family_id": "family_001178",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_030",
+    "family_id": "family_001689",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_031",
+    "family_id": "family_001815",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_032",
+    "family_id": "family_001319",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_033",
+    "family_id": "family_000388",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_034",
+    "family_id": "family_000061",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_035",
+    "family_id": "family_001024",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_036",
+    "family_id": "family_000405",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_037",
+    "family_id": "family_000603",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_038",
+    "family_id": "family_000483",
+    "personalized_option": "B"
+  },
+  {
+    "review_id": "review_039",
+    "family_id": "family_001015",
+    "personalized_option": "A"
+  },
+  {
+    "review_id": "review_040",
+    "family_id": "family_000368",
+    "personalized_option": "A"
+  }
+]

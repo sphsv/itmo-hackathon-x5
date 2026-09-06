@@ -1,5 +1,7 @@
 # Продуктовые материалы — промежуточная версия
 
+> Архив планирования/checkpoint до финальной интеграции 06.09.2026. Ниже сохранены прежние решения и TODO, не текущий контракт кода. Актуальны [PROJECT_DESCRIPTION.md](PROJECT_DESCRIPTION.md), [MODEL_CARD.md](MODEL_CARD.md) и [FINAL_SUBMISSION_CHECKLIST.md](FINAL_SUBMISSION_CHECKLIST.md).
+
 > Архив чек-поинта 04.09. Актуальная продуктовая версия находится в `PRODUCT_BRIEF.md`, доказательства — в `research/CLAIMS_AND_EVIDENCE.md`, пилот — в `PILOT_DESIGN.md`, финальная готовность — в `FINAL_SUBMISSION_CHECKLIST.md`.
 
 > Компактный материал под обязательный раздел `tasks.md`. Детальная проработка сохранена в `CONCEPT.md`, `ECONOMICS.md`, `ADDITIONAL_MATERIALS.md` и `AI_LOG.md`. Это промежуточная версия: факты, модели, допущения и будущие эксперименты не смешиваются.

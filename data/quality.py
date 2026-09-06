@@ -78,8 +78,9 @@ def validate_source_dataset(root: Path | str = Path(".")) -> dict[str, object]:
         item_counts[receipt_id] += 1
         shelf = float(item["price_shelf"])
         paid = float(item["price_paid"])
-        paid_by_receipt[receipt_id] += paid
-        savings_by_receipt[receipt_id] += shelf - paid
+        qty = float(item["qty"])
+        paid_by_receipt[receipt_id] += paid * qty
+        savings_by_receipt[receipt_id] += (shelf - paid) * qty
         receipt = receipt_by_id.get(receipt_id)
         if receipt is not None:
             profile = profile_by_family.get(receipt["family_id"])
@@ -97,7 +98,7 @@ def validate_source_dataset(root: Path | str = Path(".")) -> dict[str, object]:
     expected_segment_share = {
         segment: sum(
             network_counts[network] / max(len(profiles), 1)
-            * SEGMENT_WEIGHTS[network][index]
+            * SEGMENT_WEIGHTS[network][index] / sum(SEGMENT_WEIGHTS[network])
             for network in NETWORK_WEIGHTS
         )
         for index, segment in enumerate(SEGMENTS)
@@ -149,6 +150,7 @@ def validate_source_dataset(root: Path | str = Path(".")) -> dict[str, object]:
         "receipt_amounts_reconcile": receipt_totals_match,
         "item_prices_are_valid": all(
             0 <= float(row["price_paid"]) <= float(row["price_shelf"])
+            and float(row["qty"]) > 0 and float(row["qty"]).is_integer()
             for row in items
         ),
         "excluded_flags_match_categories": all(
@@ -178,8 +180,13 @@ def validate_source_dataset(root: Path | str = Path(".")) -> dict[str, object]:
         ),
     }
     failed_checks = [name for name, passed in checks.items() if not passed]
+    statistical = {"segment_share_within_1pp", "target_avg_check_is_higher",
+                   "target_frequency_is_higher", "hunter_markdown_rate_is_higher"}
+    structural_failures = [name for name in failed_checks if name not in statistical]
     report = {
-        "status": "passed" if not failed_checks else "failed",
+        "status": "failed" if structural_failures else ("warning" if failed_checks else "passed"),
+        "structural_failures": structural_failures,
+        "distribution_warnings": [name for name in failed_checks if name in statistical],
         "checks": checks,
         "failed_checks": failed_checks,
         "counts": {

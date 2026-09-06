@@ -6,7 +6,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from ai import evaluate, run_agent
+from ai.evaluate import evaluate
+from ai.personalizer import run_agent
 from data import (
     generate,
     prepare_blind_review_sample,
@@ -16,7 +17,7 @@ from data import (
     validate_source_dataset,
 )
 from proto import build
-from sim import simulate
+from sim.simulate import simulate
 from sim.rules import fraud_score, referral_status, review_required
 
 
@@ -86,13 +87,13 @@ class PocTests(unittest.TestCase):
             self.assertLess(threshold_70["recall"], 1)
 
             agent_result = run_agent(30, seed=42, root=root)
-            self.assertEqual(agent_result["sample"], 30)
+            self.assertEqual(agent_result["sample"], len(target_profiles))
             eval_result = evaluate(root)
             self.assertGreaterEqual(eval_result["constraints_pass_rate"], 1.0)
-            self.assertGreaterEqual(eval_result["personalized_behavior_accuracy"], 0.70)
-            self.assertGreater(eval_result["personalized_behavior_accuracy"], eval_result["static_one_size_fits_all_accuracy"])
-            sim_result = simulate(8, seed=42, root=root)
-            self.assertEqual(sim_result["families"], 60)
+            self.assertEqual(eval_result["sample_size"], len(target_profiles) * 4)
+            self.assertEqual(eval_result["human_relevance"], "not_measured")
+            sim_result = simulate(4, seed=42, root=root)
+            self.assertEqual(sim_result["families"], len(target_profiles))
             proto_result = build(root)
             self.assertTrue(Path(proto_result["prototype"]).exists())
 

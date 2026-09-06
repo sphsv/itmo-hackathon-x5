@@ -1,11 +1,13 @@
 {
   "config": {
     "families": 2000,
-    "weeks": 8,
-    "agent_sample": 30,
+    "weeks": 4,
+    "agent_sample": 40,
     "seed": 42,
+    "output_dir": ".",
     "step": "all"
   },
+  "status": "synthetic",
   "data": {
     "families": 2000,
     "receipts": 41191,
@@ -22,6 +24,8 @@
   },
   "data_quality": {
     "status": "passed",
+    "structural_failures": [],
+    "distribution_warnings": [],
     "checks": {
       "expected_schemas": true,
       "tables_are_not_empty": true,
@@ -58,18 +62,18 @@
         "старшие": 0.1135
       },
       "expected_segment_share": {
-        "молодёжь": 0.3453,
-        "вредные привычки": 0.0462,
-        "дети до 3": 0.2638,
-        "зрелые": 0.2262,
-        "старшие": 0.1214
+        "молодёжь": 0.3445,
+        "вредные привычки": 0.0461,
+        "дети до 3": 0.263,
+        "зрелые": 0.2255,
+        "старшие": 0.121
       },
       "segment_deviation_pp": {
-        "молодёжь": 0.92,
-        "вредные привычки": 0.18,
-        "дети до 3": 0.88,
-        "зрелые": 0.28,
-        "старшие": 0.79
+        "молодёжь": 1.0,
+        "вредные привычки": 0.19,
+        "дети до 3": 0.8,
+        "зрелые": 0.35,
+        "старшие": 0.75
       },
       "avg_check_rub": {
         "target": 750.55,
@@ -219,56 +223,112 @@
       }
     ],
     "limitations": [
-      "Сценарии экспертно заданы и не являются реальными antifraud-данными X5.",
+      "Сценарии вручную сконструированы авторами датасета; это не независимая экспертная разметка и не данные X5.",
       "Пограничные случаи исключены из precision и recall до ручной разметки.",
       "Метрики показывают поведение ruleset v0, а не production-качество."
     ]
   },
   "ai": {
-    "sample": 30,
+    "sample": 510,
+    "scope": "all_target_profiles",
+    "assigned": 510,
+    "deferred": 0,
     "mechanics": {
-      "rostomer": 18,
-      "save_product": 11,
-      "stage_mission": 1
-    }
+      "habitual_saving": 322,
+      "markdown_saving": 188
+    },
+    "synthetic_consent": true,
+    "seed": 42
+  },
+  "review": {
+    "cases": 40,
+    "human_ratings": "not_collected",
+    "reviewer_packet": "review/reviewer_packet.zip",
+    "internal_key": "results/review_key.json"
   },
   "eval": {
-    "sample_size": 30,
-    "personalized_behavior_accuracy": 0.9667,
-    "static_one_size_fits_all_accuracy": 0.3667,
-    "absolute_uplift_pp": 60.0,
-    "constraints_pass_rate": 1.0,
-    "note": "Синтетический offline-eval; не доказывает продуктовый uplift."
-  },
-  "simulation": {
-    "families": 2000,
-    "weeks": 8,
-    "one_purchase_to_top3_share": 0.4355,
-    "fraud_review_share": 0.0055,
-    "saved_products": 11165,
-    "demos": {
-      "family_ivanovy": {
-        "growth_cm": 22.6,
-        "rank": 29,
-        "members": 42,
-        "gap_purchase_rub": 1300.0,
-        "points": 235
+    "status": "measured_on_synthetic_replay",
+    "sample_size": 2040,
+    "unique_families": 510,
+    "holdout_weeks": [
+      "2026-W33",
+      "2026-W34",
+      "2026-W35",
+      "2026-W36"
+    ],
+    "history_window_weeks": 8,
+    "systems": {
+      "personalized": {
+        "episodes": 2040,
+        "assigned": 2034,
+        "coverage": 0.9970588235294118,
+        "safety_pass_rate": 1.0,
+        "history_grounded_rate_assigned": 1.0,
+        "observed_completion_rate_itt": 0.6461,
+        "observed_completion_rate_assigned": 0.648,
+        "mean_points_per_episode": 40.63
       },
-      "family_dima": {
-        "growth_cm": 21.6,
-        "rank": 8,
-        "members": 50,
-        "gap_purchase_rub": 335.0,
-        "points": 488
+      "static": {
+        "episodes": 2040,
+        "assigned": 2040,
+        "coverage": 1.0,
+        "safety_pass_rate": 1.0,
+        "history_grounded_rate_assigned": 0.7108,
+        "observed_completion_rate_itt": 0.3373,
+        "observed_completion_rate_assigned": 0.3373,
+        "mean_points_per_episode": 32.95
       }
     },
-    "note": "Синтетическая симуляция без заложенного uplift частоты."
+    "constraints_pass_rate": 1.0,
+    "human_relevance": "not_measured",
+    "human_clarity": "not_measured",
+    "business_uplift": "not_measured",
+    "child_stage_used_for_targeting": false,
+    "note": "Future receipts unchanged. Completion measures compatibility with synthetic baskets, not behavior change. Temporal replay was inspected during development, not an untouched external test. Days within weeks are synthetic."
+  },
+  "simulation": {
+    "families": 510,
+    "weeks": 4,
+    "episodes": 2040,
+    "completed": 1318,
+    "points": 82893,
+    "demos": {
+      "family_ivanovy": {
+        "growth_cm": 12.0,
+        "family_id": "family_ivanovy",
+        "league_id": "ТС5-8",
+        "members": 7,
+        "rank": 6,
+        "points": 130,
+        "gap_to_top3_points": 102
+      },
+      "family_dima": {
+        "growth_cm": 12.2,
+        "family_id": "family_dima",
+        "league_id": "ТСЧ-2",
+        "members": 50,
+        "rank": 9,
+        "points": 252,
+        "gap_to_top3_points": 78
+      }
+    },
+    "pilot_assignment_preview": {
+      "C": 133,
+      "D": 134,
+      "B": 136,
+      "A": 107
+    },
+    "pilot_effect": "not_measured",
+    "league_status": "offline_optional_preview_not_live_competition",
+    "referral_status": "future_not_implemented",
+    "note": "Target cohort only; no extra purchases generated. Dates inside source weeks are synthetic. C/D sharing effects are not simulated."
   },
   "prototype": {
     "prototype": "proto/index.html",
+    "interactive_command": "python3 serve_demo.py",
     "families": [
-      "family_ivanovy",
-      "family_dima"
+      "family_dima",
+      "family_ivanovy"
     ]
   }
 }

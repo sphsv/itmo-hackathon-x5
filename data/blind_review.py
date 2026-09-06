@@ -106,10 +106,11 @@ def prepare_blind_review_sample(
         family_id = receipt_family.get(item["receipt_id"])
         if family_id is None:
             continue
-        item_counts[family_id] += 1
-        category_counts[family_id][item["category"]] += 1
-        promo_counts[family_id] += item["is_promo"] == "true"
-        markdown_counts[family_id] += item["is_markdown"] == "true"
+        qty = int(item["qty"])
+        item_counts[family_id] += qty
+        category_counts[family_id][item["category"]] += qty
+        promo_counts[family_id] += qty * (item["is_promo"] == "true")
+        markdown_counts[family_id] += qty * (item["is_markdown"] == "true")
 
     public_rows: list[dict[str, object]] = []
     key_rows: list[dict[str, object]] = []
@@ -127,7 +128,7 @@ def prepare_blind_review_sample(
             "items": total_items,
             "observed_avg_check_rub": round(spend[family_id] / max(total_visits, 1), 2),
             "savings_rub": round(savings[family_id], 2),
-            "avg_weekly_saving_rub": round(savings[family_id] / len(recent_weeks), 2),
+            "avg_weekly_saving_rub": round(savings[family_id] / max(len(recent_weeks), 1), 2),
             "promo_rate": round(promo_counts[family_id] / max(total_items, 1), 4),
             "markdown_rate": round(markdown_counts[family_id] / max(total_items, 1), 4),
             "top_categories": ";".join(

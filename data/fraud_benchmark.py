@@ -146,7 +146,7 @@ def prepare_fraud_benchmark(root: Path | str = Path(".")) -> dict[str, object]:
             _threshold_metrics(rows, threshold) for threshold in [40, 50, 60, 70, 80, 90]
         ],
         "limitations": [
-            "Сценарии экспертно заданы и не являются реальными antifraud-данными X5.",
+            "Сценарии вручную сконструированы авторами датасета; это не независимая экспертная разметка и не данные X5.",
             "Пограничные случаи исключены из precision и recall до ручной разметки.",
             "Метрики показывают поведение ruleset v0, а не production-качество.",
         ],

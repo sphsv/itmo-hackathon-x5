@@ -1,5 +1,7 @@
 # План на чек-поинт 04.09 · X5: игровой слой поверх лояльности
 
+> Архив планирования/checkpoint до финальной интеграции 06.09.2026. Ниже сохранены прежние решения и TODO, не текущий контракт кода. Актуальны [PROJECT_DESCRIPTION.md](PROJECT_DESCRIPTION.md), [MODEL_CARD.md](MODEL_CARD.md) и [FINAL_SUBMISSION_CHECKLIST.md](FINAL_SUBMISSION_CHECKLIST.md).
+
 > Архивный план промежуточного чек-поинта. Актуальные задачи и изменения после исследования собраны в `FINAL_TASK_PLAN.md`.
 
 ## TL;DR — прочитай это, если открыл файл впервые

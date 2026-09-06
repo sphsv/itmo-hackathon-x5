@@ -1,0 +1,2 @@
+# csv.DictWriter uses RFC-compatible CRLF; do not flag its CR as trailing space.
+*.csv whitespace=cr-at-eol

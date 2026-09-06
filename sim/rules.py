@@ -4,17 +4,9 @@ from typing import Iterable
 
 
 def savings(receipt_items: Iterable[dict[str, object]]) -> float:
-    return round(sum(float(item["price_shelf"]) - float(item["price_paid"]) for item in receipt_items), 2)
-
-
-def growth(visits: int, challenge_completed: bool, markdown_items: int) -> float:
-    raw = visits * 0.8 + (2.0 if challenge_completed else 0.0) + min(markdown_items * 0.2, 1.0)
-    return round(min(raw, 5.0), 2)
-
-
-def points(saving_rub: float, markdown_items: int, challenge_completed: bool) -> int:
-    raw = saving_rub * 0.20 + markdown_items * 4 + (25 if challenge_completed else 0)
-    return min(300, round(raw))
+    from ai.policy import money, quantity
+    return sum((money(item["price_shelf"]) - money(item["price_paid"])) * quantity(item.get("qty", 1))
+               for item in receipt_items) / 100
 
 
 def fraud_score(signals: dict[str, float | int | bool]) -> tuple[int, list[str]]:
