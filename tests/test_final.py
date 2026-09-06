@@ -17,7 +17,7 @@ from data import generate, prepare_target_dataset, prepare_blind_review_sample
 from sim.exclusions import eligible_category
 from sim.ledger import Ledger, normalize_receipt, reduce_receipts
 from sim.rules import savings
-from sim.simulate import league_table
+from sim.simulate import completion_sensitivity, league_table
 
 
 def goal(fid="f"):
@@ -54,6 +54,20 @@ class LedgerTests(unittest.TestCase):
         self.assertTrue(result["challenge_completed"])
         self.assertEqual(savings(receipt()["items"]), 50)
         self.assertEqual(money("0.29"), 29)
+
+    def test_event_contract_propagates_assignment_dimensions(self):
+        g = goal()
+        g.update(variant_id="C", rollout_id="pilot-v1-fixed-cohort")
+        other = Ledger(Path(self.tmp.name) / "contract.sqlite3")
+        try:
+            other.assign(g)
+            state = other.submit(receipt())["state"]
+            self.assertEqual(state["variant_id"], "C")
+            self.assertEqual(state["rollout_id"], "pilot-v1-fixed-cohort")
+            self.assertEqual(state["audit"][0]["assignment_id"], g["assignment_id"])
+            self.assertEqual(state["audit"][0]["rule_version"], RULE_VERSION)
+        finally:
+            other.close()
 
     def test_duplicate_and_payload_conflict(self):
         before = self.ledger.submit(receipt())["state"]
@@ -200,6 +214,17 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual([variant(str(i)) for i in range(100)], [variant(str(i)) for i in range(100)])
         self.assertEqual(set(variant(str(i)) for i in range(100)), set("ABCD"))
 
+    def test_profile_job_and_pilot_dimensions_are_separate(self):
+        profile = self.data.profiles["family_ivanovy"]
+        rec = recommend_goal(self.data.features(profile["family_id"], "2026-W37"),
+                             profile, "2026-W37", consent=True)
+        self.assertEqual(rec["x5_segment"], "дети до 3")
+        self.assertEqual(rec["job_context"]["level"], "family_week")
+        self.assertEqual(rec["job_context"]["status"], "synthetic_scenario_not_observed")
+        self.assertNotIn("behavior_type", rec)
+        self.assertIn(rec["variant_id"], "ABCD")
+        self.assertEqual(rec["rollout_id"], "pilot-v1-fixed-cohort")
+
     def test_sparse_markdown_falls_back_to_habitual_goal(self):
         feature = {"cutoff_exclusive": "2026-W37", "visits": 16,
                    "category_counts": {"молочка": 16}, "category_weeks": {"молочка": 8},
@@ -260,6 +285,18 @@ class PolicyTests(unittest.TestCase):
         rows = league_table(profiles, {str(i): 25 for i in range(5)})
         self.assertTrue(all(row["rank"] == 1 and row["gap_to_top3_points"] == 0 for row in rows))
         self.assertTrue(all("estimated_purchase_rub" not in row for row in rows))
+
+    def test_completion_sensitivity_never_creates_purchase_days(self):
+        rows = completion_sensitivity(0.5)
+        self.assertEqual(len(rows), 16)
+        self.assertEqual({row["family_pooling_completion_multiplier"] for row in rows},
+                         {1.0, 1.05, 1.1, 1.2})
+        self.assertTrue(all(row["purchase_days_created"] == 0 for row in rows))
+        stress = next(row for row in rows
+                      if row["family_pooling_completion_multiplier"] == 1.2
+                      and row["growthmeter_completion_multiplier"] == 1.2)
+        self.assertEqual(stress["c_completion_rate_scenario"], 0.6)
+        self.assertEqual(stress["d_completion_rate_scenario"], 0.72)
 
 
 class ApiTests(unittest.TestCase):

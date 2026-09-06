@@ -112,9 +112,19 @@ def recommend_goal(feature, profile, week: str, *, consent: bool = False, baseli
     start = week_start(week)
     result = {
         "family_id": profile["family_id"], "user_id": profile["user_id"],
+        # Profile and shopping situation are separate axes.  The context is an
+        # assignment-week assumption for this PoC, not a discovered AJTBD label.
+        "x5_segment": profile.get("x5_segment"),
+        "job_context": {
+            "level": "family_week",
+            "code": "planned_family_shop_budget_control",
+            "status": "synthetic_scenario_not_observed",
+        },
         "assignment_id": f"{profile['family_id']}:{week}:{'static' if baseline else POLICY_VERSION}",
         "policy_version": "static-v1" if baseline else POLICY_VERSION,
-        "rule_version": RULE_VERSION, "week": week,
+        "rule_version": RULE_VERSION, "variant_id": variant(profile["family_id"]),
+        "rollout_id": "pilot-v1-fixed-cohort", "rollout_percent": 100,
+        "week": week,
         "starts_on": start.isoformat(), "ends_before": (start + timedelta(days=7)).isoformat(),
         "status": "deferred", "categories": [], "target_saving_minor": 0,
         "mechanic": "habitual_saving", "reward_points": 25,

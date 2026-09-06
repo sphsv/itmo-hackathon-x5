@@ -30,6 +30,38 @@
     "B": 136,
     "A": 107
   },
+  "pilot_instrumentation": {
+    "fixed_cohort_families": 510,
+    "rollout_id": "pilot-v1-fixed-cohort",
+    "rollout_percent": 100,
+    "events_file": "sim/out/pilot_events.csv",
+    "observed_fields": [
+      "assigned",
+      "receipt_matched",
+      "completed",
+      "rewarded",
+      "purchase_days_synthetic"
+    ],
+    "not_observed_fields": [
+      "shown",
+      "accepted"
+    ],
+    "reward_cost_rub": "not_configured",
+    "processing_latency": "not_measured_in_offline_replay",
+    "accrual_errors": "covered_by_tests_not_measured_in_replay"
+  },
+  "completion_sensitivity": {
+    "base_assigned_completion_rate": 0.647984,
+    "multipliers": [
+      1.0,
+      1.05,
+      1.1,
+      1.2
+    ],
+    "rows": 16,
+    "file": "sim/out/completion_sensitivity.csv",
+    "interpretation": "scenario_only; multipliers apply to completion and create no purchases"
+  },
   "pilot_effect": "not_measured",
   "league_status": "offline_optional_preview_not_live_competition",
   "referral_status": "future_not_implemented",
